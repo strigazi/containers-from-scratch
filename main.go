@@ -73,6 +73,8 @@ func cg() {
 	// create dir for our demo
 	// remove cgroup with rmdir https://lists.linuxcontainers.org/pipermail/lxc-users/2011-June/002106.html
 	os.Mkdir(filepath.Join(pids, "demo"), 0755)
+	// docker run --pids-limit 10
+	// similar to settting limits with docker cli
 	must(ioutil.WriteFile(filepath.Join(pids, "demo/pids.max"), []byte("10"), 0700))
 	// Removes the new cgroup in place after the container exits
 	must(ioutil.WriteFile(filepath.Join(pids, "demo/notify_on_release"), []byte("1"), 0700))
