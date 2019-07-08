@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"strconv"
 	"syscall"
+//	"golang.org/x/sys/unix"
 )
 
 // go run main.go run <cmd> <args>
@@ -31,9 +32,13 @@ func run() {
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
+	// https://golang.org/pkg/syscall/#SysProcAttr
+	// https://godoc.org/golang.org/x/sys/unix
+	// https://github.com/golang/sys/blob/master/unix/zerrors_linux_amd64.go#L13
 	cmd.SysProcAttr = &syscall.SysProcAttr{
 		Cloneflags: syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID | syscall.CLONE_NEWNS,
 		Unshareflags: syscall.CLONE_NEWNS,
+//		AmbientCaps: []uintptr{unix.CAP_SYS_TIME,},
 	}
 
 	must(cmd.Run())
