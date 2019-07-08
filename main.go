@@ -49,7 +49,8 @@ func child() {
 	cmd.Stderr = os.Stderr
 
 	must(syscall.Sethostname([]byte("container")))
-	must(syscall.Chroot("/home/liz/ubuntufs"))
+	// See Readme.md on how to download the root fs.
+	must(syscall.Chroot("/root/ubuntufs"))
 	must(os.Chdir("/"))
 	must(syscall.Mount("proc", "proc", "proc", 0, ""))
 	// must(syscall.Mount("thing", "mytemp", "tmpfs", 0, ""))
