@@ -13,6 +13,7 @@ import (
 // go run main.go run <cmd> <args>
 // docker         run <cmd> <args>
 func main() {
+	fmt.Printf("Running as pid %v \n", os.Getpid())
 	switch os.Args[1] {
 	case "run":
 		run()
