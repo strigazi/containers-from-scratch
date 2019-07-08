@@ -70,7 +70,8 @@ func child() {
 func cg() {
 	cgroups := "/sys/fs/cgroup/"
 	pids := filepath.Join(cgroups, "pids")
-        // create dir for our demo
+	// create dir for our demo
+	// remove cgroup with rmdir https://lists.linuxcontainers.org/pipermail/lxc-users/2011-June/002106.html
 	os.Mkdir(filepath.Join(pids, "demo"), 0755)
 	must(ioutil.WriteFile(filepath.Join(pids, "demo/pids.max"), []byte("10"), 0700))
 	// Removes the new cgroup in place after the container exits
